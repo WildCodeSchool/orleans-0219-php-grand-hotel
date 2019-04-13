@@ -1,0 +1,20 @@
+{% extends 'layoutAdmin.html.twig' %}
+
+{% block content %}
+
+
+    <div class="text-center"><a class="btn btn-success mt-5 mb-5" href="addroom" role="button">Ajouter une chambre</a> </div>
+
+    {% for key, room in rooms %}
+
+        <div class="row m-0 pt-3 pb-2 border-top border-bottom {% if key is even %}bg-light{% endif %}">
+
+
+    <p class="col-2 text-body">{{ room.name }}<p>
+    <div class="col-2"><a class="btn btn-primary" href="#" role="button">Modifier</a> </div>
+    <div class="col-2"><a class="btn btn-primary" href="#" role="button">supprimer</a></div>
+</div>
+    {% endfor %}
+
+
+{% endblock %}
