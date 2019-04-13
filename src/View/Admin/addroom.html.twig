@@ -3,15 +3,70 @@
 
 
     {% block content %}
+        <h1>Ajouter une chambre</h1>
 
-<form method="post" enctype="multipart/form-data" action="succes">
+        <div class="row justify-content-center">
+            <form method="post" enctype="multipart/form-data" action="succes" class="col-5">
 
-    <input type="file" name="image">
-
-    <input type="submit" name="Envoyer">
-</form>
+                <div class="row">
+                    <label for="roomName" class=" col-4 pt-1 pl-3">Nom de la chambre :</label>
 
 
+                    <input type="text" class=" mb-2 col-6" id="roomName" name="name"
+                           placeholder="Moins de 100 caractères" value="{{ data.name }}">
+                </div>
+                <div class="row pt-2">
+                    <label for="description" class="col-4 align-self-center">Description de la chambre :</label>
+
+
+                    <textarea class=" mb-2 m-0 col-6" id="description" name="description"
+                              placeholder="Entrez votre description ici" rows="3">{{ data.description }}</textarea>
+                </div>
+
+                <div class="row pt-2 mt-2 mb-2">
+                    <label for="price" class=" col-4 pt-1 pl-3">Prix de la chambre :</label>
+
+
+                    <input type="number" class=" mb-2 col-6" id="price" name="price"
+                           value="{{ data.price }}">
+                </div>
+
+                <div class="row pt-2 mb-3 mt-2">
+                    <label for="area" class=" col-4 pt-1 pl-3">Surface de la chambre :</label>
+
+
+                    <input type="number" class=" mb-2 col-6" id="area" name="area"
+                           value="{{ data.price }}">
+                </div>
+                {% for key, i in 1..6 %}
+                    <div class="row mb-3">
+                        <label for="caracteristic{{ i }}" class=" col-4 pt-1 pl-3">Caractéristique {{ i }}:</label>
+
+
+                        <input type="text" class=" mb-2 col-6" id="caracteristic1" name="caracteristic{{ i }}"
+                               placeholder="Moins de 50 caractères" value="{{ data.caracteristic.key }}">
+                    </div>
+                {% endfor %}
+                {% for key, i in 1..4 %}
+                    <div class="row mb-2 mt-3">
+
+                        <label for="photo{{ i }}" class=" col-2 pt-1 pl-3">Photo {{ i }}:</label>
+                        {% if key==0 %}
+                            <div class="col-3 font-weight-bold pt-1"> Photo principale :</div>
+                        {% endif %}
+
+                        <input type="file" name="photo{{ i }}" id="photo{{ i }}" class="mb-2 col-6 mr-0">
+
+
+
+                    </div>
+                {% endfor %}
+                <div class="row justify-content-center mt-4">
+                <input type="submit" name="Envoyer" class="col-3 mb-4">
+                </div>
+            </form>
+
+        </div>
     {% endblock %}
 
 

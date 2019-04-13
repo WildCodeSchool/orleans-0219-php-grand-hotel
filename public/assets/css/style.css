@@ -1,19 +1,19 @@
 /* Navbar */
 
-.navbar{
+.navbar {
     background-color: #2F3B40;
     margin-bottom: 10px;
     font-family: "Dancing Script", sans-serif;
 }
 
-.navbar-brand{
+.navbar-brand {
     font-size: 40pt;
     margin-left: 5px;
     margin-right: 50px;
     color: whitesmoke;
 }
 
-.navbar-brand-resa{
+.navbar-brand-resa {
     font-size: xx-large;
     color: black;
 }
@@ -23,37 +23,37 @@
 
 }
 
-.resa-btn{
+.resa-btn {
 
 
 }
 
-.navbar-brand-resa:hover{
+.navbar-brand-resa:hover {
     text-decoration: underline;
     color: darkslateblue;
 }
 
 
-.navbar-brand:hover{
+.navbar-brand:hover {
     text-decoration: underline;
     color: whitesmoke;
 }
 
-.nav-link{
+.nav-link {
     font-size: xx-large;
     color: whitesmoke;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     text-decoration: underline;
-    color:  whitesmoke;
+    color: whitesmoke;
 }
 
-.button.navbar-toggler.navbar-dark{
+.button.navbar-toggler.navbar-dark {
     margin: auto;
 }
 
-.nav-item{
+.nav-item {
     margin-right: 30px;
 }
 
@@ -71,7 +71,7 @@
     font-family: "Dancing Script", sans-serif;
 }
 
-.text p{
+.text p {
     color: #FFFFF;
     font-size: 30px;
     font-family: "The Girl Next Door", sans-serif;
@@ -81,12 +81,12 @@
 
 
 /*Général*/
-h1{
+h1 {
     font-family: "Dancing Script", sans-serif;
     font-size: 90px;
 }
 
-h2{
+h2 {
     font-size: 35pt;
     font-family: "Dancing Script", sans-serif;
 }
@@ -102,11 +102,11 @@ body {
 }
 
 
-
 /*rooms/index*/
 .roomCard {
     border: none;
 }
+
 .services {
     background-color: #2F3D40;
     color: #FFFFFF;
@@ -123,61 +123,58 @@ body {
 }
 
 
-
-
 /* Footer */
-.page-footer{
+.page-footer {
     background-color: #2F3D40;
 }
 
-.logo{
+.logo {
     width: 5em;
 }
 
-.contact{
+.contact {
     padding-top: 12px;
-    color: #FFFFFF;
-    font-family: "The Girl Next Door", sans-serif;
 }
 
-
-.logo1{
+.logo1 {
     padding-bottom: 30px;
 }
 
-.logofooter{
+.logofooter {
     width: 20em;
     object-fit: cover;
     padding-right: 90px;
-  }
+}
 
-.lien{
+.lien {
     padding-left: 50px;
     padding-bottom: 20px;
 }
+
 /* EndFooter */
 
-.text-localisation{
+.text-localisation {
     text-align: justify;
     font-family: "The Girl Next Door", sans-serif;
     font-size: 25px;
 
 }
 
-.title-localisation{
+.title-localisation {
     text-align: center;
     padding-bottom: 50px;
 }
 
 
-.media-map{
+.media-map {
     margin-top: 55%;
 }
 
 
-    .roomPrice{
+.roomPrice {
     font-size: 3vw;
-    font-family: "Dancing Script", sans-serif;}
+    font-family: "Dancing Script", sans-serif;
+}
 
 
 
