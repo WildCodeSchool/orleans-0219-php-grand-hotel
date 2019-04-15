@@ -33,6 +33,7 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/rooms.html.twig', ['rooms' => $rooms]);
     }
 
+
     /**
      * @return string
      * @throws \Twig_Error_Loader
@@ -42,8 +43,27 @@ class AdminController extends AbstractController
     public function addroom()
     {
         $adminRoomManager = new AdminRoomManager();
+        $data = [];
+        $errors = [];
 
 
-        return $this->twig->render('Admin/addroom.html.twig');
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $postData = $_POST;
+            $adminRoomManager->checkName($postData, $data, $errors);
+            $adminRoomManager->checkDescription($postData, $data, $errors, 'description');
+            $adminRoomManager->checkNumber($postData, $data, $errors, 'price');
+            $adminRoomManager->checkNumber($postData, $data, $errors, 'area');
+
+            for ($i = 1; $i < 7; $i++) {
+                $nameInArray = ${'caracteristic' .$i};
+                if (isset($postData[$nameInArray])) {
+                    $adminRoomManager->checkCaracteristics($postData, $data, $errors, $nameInArray);
+                }
+            }
+        }
+
+        return $this->twig->render('Admin/addroom.html.twig', ['data' => $adminRoomManager->data,
+            'errors' => $adminRoomManager->errors, 'post' => $_POST]);
     }
 }
