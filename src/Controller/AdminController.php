@@ -7,7 +7,7 @@ use App\Model\AdminRoomManager;
 
 class AdminController extends AbstractController
 {
-    /**
+    /**Initializes the admin index.
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -19,6 +19,7 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Gives the existing rooms in database
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -35,6 +36,7 @@ class AdminController extends AbstractController
 
 
     /**
+     * Checks the $_POST data
      * @return string
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
