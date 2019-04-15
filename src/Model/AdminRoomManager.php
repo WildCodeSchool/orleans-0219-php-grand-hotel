@@ -7,13 +7,12 @@ class AdminRoomManager extends AbstractManager
 {
 
 
-    public $boum = [0, 1];
     public $data = [];
     public $postData = [];
     public $errors = [];
     public $numberOfCaracteristics = 6;
 
-    /**
+    /**Associates the table necessary in the concerned page
      *
      */
     const TABLE = 'room';
@@ -26,7 +25,12 @@ class AdminRoomManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-
+    /**Checks the name, trims, fills an array errors in case of problem, and an array data if everything is OK
+     * @param array $postData
+     * @param array $data
+     * @param array $errors
+     * @return array
+     */
     public function checkName(array $postData, array $data, array $errors): array
     {
         $postData['name'] = trim($postData['name']);
@@ -41,7 +45,15 @@ class AdminRoomManager extends AbstractManager
         }
     }
 
-    public function checkDescription(array $postData, $data, array $errors, string $nameInArray): array
+    /**Checks the descriptions, trims, fills an array errors in case of problem, and an array data if everything is OK
+     * @param array $postData
+     * @param $data
+     * @param array $errors
+     * @param string $nameInArray
+     * @return array
+     *
+     */
+    public function checkDescription(array $postData, array $data, array $errors, string $nameInArray): array
     {
         $postData[$nameInArray] = trim($postData[$nameInArray]);
         if (strlen($postData[$nameInArray]) < 1) {
@@ -55,7 +67,14 @@ class AdminRoomManager extends AbstractManager
         }
     }
 
-    public function checkNumber(array $postData, $data, array $errors, string $nameInArray): array
+    /** Checks the area and the price, fills an array errors in case of problem, and an array data if everything is OK
+     * @param array $postData
+     * @param array $data
+     * @param array $errors
+     * @param string $nameInArray
+     * @return array
+     */
+    public function checkNumber(array $postData, array $data, array $errors, string $nameInArray): array
     {
         $postData[$nameInArray] = trim($postData[$nameInArray]);
         if (($postData[$nameInArray] < 0) || (!is_numeric($postData[$nameInArray]))) {
@@ -69,20 +88,13 @@ class AdminRoomManager extends AbstractManager
         }
     }
 
-    public function checkArea(array $postData, $data, array $errors, string $nameInArray): array
-    {
-        $postData[$nameInArray] = trim($postData[$nameInArray]);
-        if (($postData[$nameInArray] < 0) || (!is_numeric($postData[$nameInArray]))) {
-            $errors[$nameInArray] = 'Entrez un nombre supérieur à zéro.';
-            $this->errors[$nameInArray] = $errors[$nameInArray];
-            return $this->errors;
-        } else {
-            $data[$nameInArray] = $postData[$nameInArray];
-            $this->data[$nameInArray] = $data[$nameInArray];
-            return $this->data;
-        }
-    }
-
+    /**Checks the caracteristics length, fills an array errors in case of problem, and an array data if everything is OK
+     * @param array $postData
+     * @param array $data
+     * @param array $errors
+     * @param string $nameInArray
+     * @return array
+     */
     public function checkCaracteristics(array $postData, array $data, array $errors, string $nameInArray)
     {
         if (isset($postData[$nameInArray])) {
