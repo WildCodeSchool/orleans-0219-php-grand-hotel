@@ -27,7 +27,7 @@ class AdminRoomManager extends AbstractManager
     }
 
 
-    public function checkName(array $postData, $data, array $errors): array
+    public function checkName(array $postData, array $data, array $errors): array
     {
         $postData['name'] = trim($postData['name']);
         if ((strlen($postData['name']) < 1) || (strlen($postData['name']) > 50)) {
@@ -83,17 +83,18 @@ class AdminRoomManager extends AbstractManager
         }
     }
 
-    public function checkCaracteristics(array $postData, $data, array $errors, $nameInArray): array
+    public function checkCaracteristics(array $postData, array $data, array $errors, string $nameInArray)
     {
-
-        if (strlen($postData[$nameInArray]) > 50) {
-            $errors[$nameInArray] = "50 caractères maximum";
-            $this->errors[$nameInArray] = $errors[$nameInArray];
-            return $this->errors;
-        } else {
-            $data[$nameInArray] = $postData[$nameInArray];
-            $this->data[$nameInArray] = $data[$nameInArray];
-            return $this->data;
+        if (isset($postData[$nameInArray])) {
+            if (strlen($postData[$nameInArray]) > 50) {
+                $errors[$nameInArray] = "50 caractères maximum";
+                $this->errors[$nameInArray] = $errors[$nameInArray];
+                return $this->errors;
+            } else {
+                $data[$nameInArray] = $postData[$nameInArray];
+                $this->data[$nameInArray] = $data[$nameInArray];
+                return $this->data;
+            }
         }
     }
 }

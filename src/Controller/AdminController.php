@@ -54,14 +54,14 @@ class AdminController extends AbstractController
             $adminRoomManager->checkDescription($postData, $data, $errors, 'description');
             $adminRoomManager->checkNumber($postData, $data, $errors, 'price');
             $adminRoomManager->checkNumber($postData, $data, $errors, 'area');
-
-            for ($i = 1; $i < 7; $i++) {
-                $nameInArray = ${'caracteristic' .$i};
-                if (isset($postData[$nameInArray])) {
-                    $adminRoomManager->checkCaracteristics($postData, $data, $errors, $nameInArray);
-                }
-            }
+            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic1');
+            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic2');
+            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic3');
+            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic4');
+            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic5');
+            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic6');
         }
+
 
         return $this->twig->render('Admin/addroom.html.twig', ['data' => $adminRoomManager->data,
             'errors' => $adminRoomManager->errors, 'post' => $_POST]);

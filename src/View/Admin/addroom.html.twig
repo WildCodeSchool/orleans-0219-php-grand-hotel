@@ -4,8 +4,7 @@
 
     {% block content %}
 
-        {{ dump(errors) }}
-        {{ dump(data) }}
+
         {{ dump (post) }}
 
 
@@ -69,6 +68,86 @@
                     <div class="alert alert-danger">{{ errors.caracteristic1 }}</div>
 
                 {% endif %}
+
+                <div class="row mb-3">
+                    <label for="caracteristic2" class=" col-4 pt-1 pl-3">Caractéristique 2 : </label>
+
+
+                    <input type="text" class=" mb-2 col-6" id="caracteristic2"
+                           name="caracteristic2"
+                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic2 }}">
+
+                </div>
+
+                {% if errors.caracteristic2 %}
+                    <div class="alert alert-danger">{{ errors.caracteristic2 }}</div>
+
+                {% endif %}
+
+
+                <div class="row mb-3">
+                    <label for="caracteristic3" class=" col-4 pt-1 pl-3">Caractéristique 3 : </label>
+
+
+                    <input type="text" class=" mb-2 col-6" id="caracteristic3"
+                           name="caracteristic3"
+                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic3 }}">
+
+                </div>
+
+                {% if errors.caracteristic3 %}
+                    <div class="alert alert-danger">{{ errors.caracteristic3 }}</div>
+
+                {% endif %}
+
+
+                <div class="row mb-3">
+                    <label for="caracteristic4" class=" col-4 pt-1 pl-3">Caractéristique 4 : </label>
+
+
+                    <input type="text" class=" mb-2 col-6" id="caracteristic4"
+                           name="caracteristic4"
+                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic4 }}">
+
+                </div>
+
+                {% if errors.caracteristic4 %}
+                    <div class="alert alert-danger">{{ errors.caracteristic4 }}</div>
+
+                {% endif %}
+
+
+                <div class="row mb-3">
+                    <label for="caracteristic5" class=" col-4 pt-1 pl-3">Caractéristique 5 : </label>
+
+
+                    <input type="text" class=" mb-2 col-6" id="caracteristic5"
+                           name="caracteristic5"
+                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic5 }}">
+
+                </div>
+
+                {% if errors.caracteristic5 %}
+                    <div class="alert alert-danger">{{ errors.caracteristic5 }}</div>
+
+                {% endif %}
+
+
+                <div class="row mb-3">
+                    <label for="caracteristic6" class=" col-4 pt-1 pl-3">Caractéristique 6 : </label>
+
+
+                    <input type="text" class=" mb-2 col-6" id="caracteristic6"
+                           name="caracteristic6"
+                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic6 }}">
+
+                </div>
+
+                {% if errors.caracteristic6 %}
+                    <div class="alert alert-danger">{{ errors.caracteristic6 }}</div>
+
+                {% endif %}
+
 
 
                 {% for i in 1..4 %}
