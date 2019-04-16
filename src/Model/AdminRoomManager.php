@@ -12,18 +12,71 @@ class AdminRoomManager extends AbstractManager
     public $errors = [];
     public $numberOfCaracteristics = 6;
 
-    /**Associates the table necessary in the concerned page
-     *
+    /**
+     * Gives the table name
      */
     const TABLE = 'room';
 
+
     /**
-     *  Initializes this class.
+     * @var string
+     */
+    protected $className;
+    /**
+     * @var string
+     */
+    protected $tableToJoin;
+    /**
+     * @var string
+     */
+    protected $secondTableToJoin;
+
+    /**
+     * RoomManager constructor
      */
     public function __construct()
     {
         parent::__construct(self::TABLE);
+        $this->tableToJoin = 'room_photo';
+        $this->secondTableToJoin = 'room_caracteristic';
     }
+
+    /**
+     * get the table rooms joined with the tables photos and caracteristic
+     * @param string $foreignKey
+     * @param string $primaryKey
+     * @param string $secondForeignKey
+     * @return array
+     */
+    public function selectAllDoubleJoin(string $foreignKey, string $primaryKey, string $secondForeignKey): array
+    {
+        return $this->pdo->query('SELECT * FROM ' . $this->table . ' JOIN ' . $this->tableToJoin . ' ON ' .
+            $this->tableToJoin . '.' . $foreignKey . '=' . $this->table . '.' . $primaryKey . ' JOIN ' .
+            $this->secondTableToJoin . ' ON ' .
+            $this->secondTableToJoin . '.' . $secondForeignKey . '=' . $this->table . '.' . $primaryKey)->fetchAll();
+    }
+
+    /**
+     * retourne table photos without ids
+     * @return array
+     */
+    public function selectQuiteAllFromFirstJoined(): array
+    {
+
+        return $this->pdo->query('SELECT photo1, photo2, photo3, photo4 FROM ' . $this->tableToJoin)->fetchAll();
+    }
+
+    /**
+     * get the table caracteristics
+     * @return array
+     */
+    public function selectQuiteAllFromSecondJoined(): array
+    {
+
+        return $this->pdo->query('SELECT caracteristic1, caracteristic2, caracteristic3, caracteristic4,
+caracteristic5, caracteristic6 FROM ' . $this->secondTableToJoin)->fetchAll();
+    }
+
 
     /**Checks the name, trims, fills an array errors in case of problem, and an array data if everything is OK
      * @param array $postData

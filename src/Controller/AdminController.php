@@ -47,6 +47,9 @@ class AdminController extends AbstractController
         $adminRoomManager = new AdminRoomManager();
         $data = [];
         $errors = [];
+        $photos=$adminRoomManager->selectQuiteAllFromFirstJoined();
+        $caracteristics=$adminRoomManager->selectQuiteAllFromSecondJoined();
+
 
 
 
