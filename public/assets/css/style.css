@@ -1,3 +1,48 @@
+/* Navbar */
+
+.navbar{
+    background-color: #2F3B40;
+    margin-bottom: 10px;
+    font-family: "Dancing Script";
+}
+
+.navbar-brand{
+    font-size: xx-large;
+    margin-left: 5px;
+    margin-right: 50px;
+    color: whitesmoke;
+}
+
+.navbar-brand:hover{
+    text-decoration: underline;
+    color: whitesmoke;
+}
+
+.nav-link{
+    font-size: xx-large;
+    color: whitesmoke;
+    margin-left: 20px;
+}
+
+.nav-link:hover{
+    text-decoration: underline;
+    color:  whitesmoke;
+}
+
+.button.navbar-toggler.navbar-dark{
+    margin: auto;
+}
+
+.nav-item{
+    margin-right: 100px;
+}
+
+.reservation{
+    border: 1px solid whitesmoke;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+}
 
 /*Général*/
 h1, h2 {
@@ -54,8 +99,9 @@ body {
 
 .contact{
     padding-top: 12px;
-    color: #FFFFFF
+    color: #FFFFFF;
 }
+
 
 .logo1{
     padding-bottom: 30px;
