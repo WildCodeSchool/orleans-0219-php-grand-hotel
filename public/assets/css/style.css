@@ -87,6 +87,16 @@ body {
 
 
 
+/*CarrouselIndex*/
+
+.carousel img {
+    background-size: cover;
+    width: auto;
+    height: 400px;
+}
+/* EndCarrouselIndex*/
+
+
 
 /* Footer */
 .page-footer{
