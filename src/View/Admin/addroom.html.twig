@@ -5,8 +5,16 @@
     {% block content %}
 
 
-        {{ dump (caracteristics) }}
+        errors{{ dump (errors) }}
 
+        Data {{ dump (data) }}
+
+        caracteristics {{ dump (caracteristics) }}
+
+        CARAC KEY
+{% for key, caracteristic in caracteristics[0] %}
+        {{ key }}
+        {% endfor %}
 
 
         <h1>Ajouter une chambre</h1>
@@ -43,16 +51,7 @@
                 {% if errors.price %}
                     <div class="alert alert-danger">{{ errors.price }}</div>
                 {% endif %}
-                <div class="row pt-2 mb-3 mt-2">
-                    <label for="area" class=" col-4 pt-1 pl-3">Surface de la chambre :</label>
 
-
-                    <input type="number" class=" mb-2 col-6" id="area" name="area"
-                           value="{{ data.area }}">
-                </div>
-                {% if errors.area %}
-                    <div class="alert alert-danger">{{ errors.area }}</div>
-                {% endif %}
 
                 <div class="row mb-3">
                     <label for="caracteristic1" class=" col-4 pt-1 pl-3">Caractéristique 1 : </label>

@@ -47,10 +47,8 @@ class AdminController extends AbstractController
         $adminRoomManager = new AdminRoomManager();
         $data = [];
         $errors = [];
-        $photos=$adminRoomManager->selectQuiteAllFromFirstJoined();
-        $caracteristics=$adminRoomManager->selectQuiteAllFromSecondJoined();
-
-
+        $photos = $adminRoomManager->selectQuiteAllFromFirstJoined();
+        $caracteristics = $adminRoomManager->selectQuiteAllFromSecondJoined();
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -58,17 +56,13 @@ class AdminController extends AbstractController
             $adminRoomManager->checkName($postData, $data, $errors);
             $adminRoomManager->checkDescription($postData, $data, $errors, 'description');
             $adminRoomManager->checkNumber($postData, $data, $errors, 'price');
-            $adminRoomManager->checkNumber($postData, $data, $errors, 'area');
-            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic1');
-            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic2');
-            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic3');
-            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic4');
-            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic5');
-            $adminRoomManager->checkCaracteristics($postData, $data, $errors, 'caracteristic6');
+            foreach ($caracteristics[0] as $key => $caracteristic) {
+                $adminRoomManager->checkCaracteristics($postData, $data, $errors, $key);
+            }
         }
 
 
         return $this->twig->render('Admin/addroom.html.twig', ['data' => $adminRoomManager->data,
-            'errors' => $adminRoomManager->errors, 'post' => $_POST]);
+            'errors' => $adminRoomManager->errors, 'post' => $_POST, 'caracteristics' => $caracteristics]);
     }
 }
