@@ -35,7 +35,7 @@
                 </div>
                 {% if errors.name %}
 
-                <div class="alert alert-danger">{{ errors.name }}</div>
+                    <div class="alert alert-danger">{{ errors.name }}</div>
 
                 {% endif %}
                 <div class="row pt-2">
@@ -47,7 +47,7 @@
                 </div>
                 {% if errors.description %}
 
-                <div class="alert alert-danger">{{ errors.description }}</div>
+                    <div class="alert alert-danger">{{ errors.description }}</div>
 
                 {% endif %}
                 <div class="row pt-2 mt-2 mb-2">
@@ -58,46 +58,49 @@
                 </div>
                 {% if errors.price %}
 
-                <div class="alert alert-danger">{{ errors.price }}</div>
+                    <div class="alert alert-danger">{{ errors.price }}</div>
                 {% endif %}
 
                 {% for key, caracteristic in caracteristics[0] %}
 
 
-                <div class="row mb-3">
-                    <label for="{{ loop.index }}" class=" col-4 pt-1 pl-3">Caractéristique {{ loop.index }} : </label>
+                    <div class="row mb-3">
+                        <label for="caracteristic{{ loop.index }}"
+                               class=" col-4 pt-1 pl-3">Caractéristique {{ loop.index }} : </label>
 
 
-                    <input type="text" class=" mb-2 col-6" id="{{ loop.index }}"
-                           name="{{ key }}"
-                           placeholder="Moins de 50 caractères" value="{{ data[key] }}">
+                        <input type="text" class=" mb-2 col-6" id="caracteristic{{ loop.index }}"
+                               name="{{ key }}"
+                               placeholder="Moins de 50 caractères" value="{{ data[key] }}">
 
-                </div>
+                    </div>
 
-                {% if errors[key] %}
-                <div class="alert alert-danger">{{ errors[key] }}</div>
+                    {% if errors[key] %}
+                        <div class="alert alert-danger">{{ errors[key] }}</div>
 
-                {% endif %}
+                    {% endif %}
                 {% endfor %}
 
                 <!-- END CARAC-->
 
 
-
-                {% for i in 1..4 %}
+                {% for key, photo in photos %}
                 <div class="row mb-2 mt-3">
 
-                    <label for="photo{{ i }}" class=" col-2 pt-1 pl-3">Photo {{ i }}:</label>
+                    <label for="photo{{ loop.index }}" class=" col-2 pt-1 pl-3">Photo {{ loop.index }}:</label>
 
 
-                    <input type="file" name="photo{{ i }}" id="photo{{ i }}" class="mb-2 col-6 mr-0">
-
+                    <input type="file" name="photo{{ key }}" id="photo{{ loop.index }}" class="mb-2 col-6 mr-0">
+                    {% if errors[key] %}
+                        <div class="alert alert-danger">{{ errors[key] }}</div>
+                    {% endif %}
+                </div>
+                    {% endfor %}
+                    <div class="row justify-content-center mt-5">
+                        <input type="submit" name="Envoyer" class="col-3 mt-4 mb-4">
 
                 </div>
-                {% endfor %}
-                <div class="row justify-content-center mt-4">
-                    <input type="submit" name="Envoyer" class="col-3 mb-4">
-                </div>
+
             </form>
 
         </div>
