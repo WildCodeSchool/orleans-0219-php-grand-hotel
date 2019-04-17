@@ -1,5 +1,6 @@
 {% extends 'layoutAdmin.html.twig' %}
 
+
 {% block title %} Ajouter une chambre{% endblock %}
 
     {% block content %}
@@ -19,6 +20,7 @@
         {% endfor %}<br><br>
 
 
+
         <h1>Ajouter une chambre</h1>
 
         <div class="row justify-content-center">
@@ -32,7 +34,9 @@
                            placeholder="Moins de 50 caractères" value="{{ data.name }}">
                 </div>
                 {% if errors.name %}
+
                 <div class="alert alert-danger">{{ errors.name }}</div>
+
                 {% endif %}
                 <div class="row pt-2">
                     <label for="description" class="col-4 align-self-center">Description de la chambre :</label>
@@ -42,7 +46,9 @@
                               placeholder="Entrez votre description ici" rows="3">{{ data.description }}</textarea>
                 </div>
                 {% if errors.description %}
+
                 <div class="alert alert-danger">{{ errors.description }}</div>
+
                 {% endif %}
                 <div class="row pt-2 mt-2 mb-2">
                     <label for="price" class=" col-4 pt-1 pl-3">Prix de la chambre :</label>
@@ -51,6 +57,7 @@
                            value="{{ data.price }}">
                 </div>
                 {% if errors.price %}
+
                 <div class="alert alert-danger">{{ errors.price }}</div>
                 {% endif %}
 
@@ -74,86 +81,8 @@
                 {% endfor %}
 
                 <!-- END CARAC-->
-                <!--
-                <div class="row mb-3">
-                    <label for="caracteristic2" class=" col-4 pt-1 pl-3">Caractéristique 2 : </label>
 
 
-                    <input type="text" class=" mb-2 col-6" id="caracteristic2"
-                           name="caracteristic2"
-                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic2 }}">
-
-                </div>
-
-                {% if errors.caracteristic2 %}
-                <div class="alert alert-danger">{{ errors.caracteristic2 }}</div>
-
-                {% endif %}
-
-
-                <div class="row mb-3">
-                    <label for="caracteristic3" class=" col-4 pt-1 pl-3">Caractéristique 3 : </label>
-
-
-                    <input type="text" class=" mb-2 col-6" id="caracteristic3"
-                           name="caracteristic3"
-                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic3 }}">
-
-                </div>
-
-                {% if errors.caracteristic3 %}
-                <div class="alert alert-danger">{{ errors.caracteristic3 }}</div>
-
-                {% endif %}
-
-
-                <div class="row mb-3">
-                    <label for="caracteristic4" class=" col-4 pt-1 pl-3">Caractéristique 4 : </label>
-
-
-                    <input type="text" class=" mb-2 col-6" id="caracteristic4"
-                           name="caracteristic4"
-                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic4 }}">
-
-                </div>
-
-                {% if errors.caracteristic4 %}
-                <div class="alert alert-danger">{{ errors.caracteristic4 }}</div>
-
-                {% endif %}
-
-
-                <div class="row mb-3">
-                    <label for="caracteristic5" class=" col-4 pt-1 pl-3">Caractéristique 5 : </label>
-
-
-                    <input type="text" class=" mb-2 col-6" id="caracteristic5"
-                           name="caracteristic5"
-                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic5 }}">
-
-                </div>
-
-                {% if errors.caracteristic5 %}
-                <div class="alert alert-danger">{{ errors.caracteristic5 }}</div>
-
-                {% endif %}
-
-
-                <div class="row mb-3">
-                    <label for="caracteristic6" class=" col-4 pt-1 pl-3">Caractéristique 6 : </label>
-
-
-                    <input type="text" class=" mb-2 col-6" id="caracteristic6"
-                           name="caracteristic6"
-                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic6 }}">
-
-                </div>
-
-                {% if errors.caracteristic6 %}
-                <div class="alert alert-danger">{{ errors.caracteristic6 }}</div>
-
-                {% endif %}
--->
 
                 {% for i in 1..4 %}
                 <div class="row mb-2 mt-3">
