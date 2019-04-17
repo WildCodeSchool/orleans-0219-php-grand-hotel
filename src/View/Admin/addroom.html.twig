@@ -1,20 +1,22 @@
 {% extends 'layoutAdmin.html.twig' %}
 
-
+{% block title %} Ajouter une chambre{% endblock %}
 
     {% block content %}
 
 
-        errors{{ dump (errors) }}
+        errors{{ dump (errors) }}<br><br>
 
-        Data {{ dump (data) }}
+        Data {{ dump (data) }}<br><br>
 
-        caracteristics {{ dump (caracteristics) }}
+        POST {{ dump(post) }}
+
+        caracteristics {{ dump (caracteristics) }}<br><br>
 
         CARAC KEY
-{% for key, caracteristic in caracteristics[0] %}
-        {{ key }}
-        {% endfor %}
+        {% for key, caracteristic in caracteristics[0] %}
+            {{ key }}
+        {% endfor %}<br><br>
 
 
         <h1>Ajouter une chambre</h1>
@@ -30,7 +32,7 @@
                            placeholder="Moins de 50 caractères" value="{{ data.name }}">
                 </div>
                 {% if errors.name %}
-                    <div class="alert alert-danger">{{ errors.name }}</div>
+                <div class="alert alert-danger">{{ errors.name }}</div>
                 {% endif %}
                 <div class="row pt-2">
                     <label for="description" class="col-4 align-self-center">Description de la chambre :</label>
@@ -40,7 +42,7 @@
                               placeholder="Entrez votre description ici" rows="3">{{ data.description }}</textarea>
                 </div>
                 {% if errors.description %}
-                    <div class="alert alert-danger">{{ errors.description }}</div>
+                <div class="alert alert-danger">{{ errors.description }}</div>
                 {% endif %}
                 <div class="row pt-2 mt-2 mb-2">
                     <label for="price" class=" col-4 pt-1 pl-3">Prix de la chambre :</label>
@@ -49,25 +51,30 @@
                            value="{{ data.price }}">
                 </div>
                 {% if errors.price %}
-                    <div class="alert alert-danger">{{ errors.price }}</div>
+                <div class="alert alert-danger">{{ errors.price }}</div>
                 {% endif %}
+
+                {% for key, caracteristic in caracteristics[0] %}
 
 
                 <div class="row mb-3">
-                    <label for="caracteristic1" class=" col-4 pt-1 pl-3">Caractéristique 1 : </label>
+                    <label for="{{ loop.index }}" class=" col-4 pt-1 pl-3">Caractéristique {{ loop.index }} : </label>
 
 
-                    <input type="text" class=" mb-2 col-6" id="caracteristic1"
-                           name="caracteristic1"
-                           placeholder="Moins de 50 caractères" value="{{ data.caracteristic1 }}">
+                    <input type="text" class=" mb-2 col-6" id="{{ loop.index }}"
+                           name="{{ key }}"
+                           placeholder="Moins de 50 caractères" value="{{ data[key] }}">
 
                 </div>
 
-                {% if errors.caracteristic1 %}
-                    <div class="alert alert-danger">{{ errors.caracteristic1 }}</div>
+                {% if errors[key] %}
+                <div class="alert alert-danger">{{ errors[key] }}</div>
 
                 {% endif %}
+                {% endfor %}
 
+                <!-- END CARAC-->
+                <!--
                 <div class="row mb-3">
                     <label for="caracteristic2" class=" col-4 pt-1 pl-3">Caractéristique 2 : </label>
 
@@ -79,7 +86,7 @@
                 </div>
 
                 {% if errors.caracteristic2 %}
-                    <div class="alert alert-danger">{{ errors.caracteristic2 }}</div>
+                <div class="alert alert-danger">{{ errors.caracteristic2 }}</div>
 
                 {% endif %}
 
@@ -95,7 +102,7 @@
                 </div>
 
                 {% if errors.caracteristic3 %}
-                    <div class="alert alert-danger">{{ errors.caracteristic3 }}</div>
+                <div class="alert alert-danger">{{ errors.caracteristic3 }}</div>
 
                 {% endif %}
 
@@ -111,7 +118,7 @@
                 </div>
 
                 {% if errors.caracteristic4 %}
-                    <div class="alert alert-danger">{{ errors.caracteristic4 }}</div>
+                <div class="alert alert-danger">{{ errors.caracteristic4 }}</div>
 
                 {% endif %}
 
@@ -127,7 +134,7 @@
                 </div>
 
                 {% if errors.caracteristic5 %}
-                    <div class="alert alert-danger">{{ errors.caracteristic5 }}</div>
+                <div class="alert alert-danger">{{ errors.caracteristic5 }}</div>
 
                 {% endif %}
 
@@ -143,22 +150,21 @@
                 </div>
 
                 {% if errors.caracteristic6 %}
-                    <div class="alert alert-danger">{{ errors.caracteristic6 }}</div>
+                <div class="alert alert-danger">{{ errors.caracteristic6 }}</div>
 
                 {% endif %}
-
-
+-->
 
                 {% for i in 1..4 %}
-                    <div class="row mb-2 mt-3">
+                <div class="row mb-2 mt-3">
 
-                        <label for="photo{{ i }}" class=" col-2 pt-1 pl-3">Photo {{ i }}:</label>
-
-
-                        <input type="file" name="photo{{ i }}" id="photo{{ i }}" class="mb-2 col-6 mr-0">
+                    <label for="photo{{ i }}" class=" col-2 pt-1 pl-3">Photo {{ i }}:</label>
 
 
-                    </div>
+                    <input type="file" name="photo{{ i }}" id="photo{{ i }}" class="mb-2 col-6 mr-0">
+
+
+                </div>
                 {% endfor %}
                 <div class="row justify-content-center mt-4">
                     <input type="submit" name="Envoyer" class="col-3 mb-4">

@@ -51,6 +51,7 @@ class AdminController extends AbstractController
         $caracteristics = $adminRoomManager->selectQuiteAllFromSecondJoined();
 
 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
             $adminRoomManager->checkName($postData, $data, $errors);
