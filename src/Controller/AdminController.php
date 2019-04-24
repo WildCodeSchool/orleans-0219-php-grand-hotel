@@ -28,9 +28,9 @@ class AdminController extends AbstractController
     public function rooms()
     {
         $adminRoomManager = new AdminRoomManager();
-        $adminRoomManager->rooms = $adminRoomManager->selectAll();
+        $rooms = $adminRoomManager->selectAll();
 
-        return $this->twig->render('Admin/rooms.html.twig', ['rooms' => $adminRoomManager->rooms]);
+        return $this->twig->render('Admin/rooms.html.twig', ['rooms' => $rooms]);
     }
 
     /**Checks the $_POST data
@@ -66,18 +66,11 @@ class AdminController extends AbstractController
                 $adminRoomManager->addPhotosInDatabase($adminRoomManager->data);
                 $adminRoomManager->transferFiles();
             }
-            header('location:../Admin/success');
+            header('location:../Admin/rooms?success=true');
         }
         return $this->twig->render(
             'Admin/addroom.html.twig',
             ['photos' => $photos, 'caracteristics' => $caracteristics, 'rooms' => $adminRoomManager->rooms]
         );
-    }
-
-    public function success()
-    {
-        $adminRoomManager = new AdminRoomManager();
-        $adminRoomManager->rooms = $adminRoomManager->selectAll();
-        return $this->twig->render('Admin/success.html.twig', ['rooms' => $adminRoomManager->rooms]);
     }
 }
