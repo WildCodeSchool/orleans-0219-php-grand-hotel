@@ -7,24 +7,24 @@ use App\Model\AdminRoomManager;
 
 class AdminController extends AbstractController
 {
+
     /**Initializes the admin index.
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function index()
     {
         return $this->twig->render('Admin/index.html.twig');
     }
 
-    /**
-     * Gives the existing rooms in database
+
+    /**Gives the existing rooms in database
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     *
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function rooms()
     {
@@ -35,12 +35,11 @@ class AdminController extends AbstractController
     }
 
 
-    /**
-     * Checks the $_POST data
+    /**Checks the $_POST data
      * @return string
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function addroom()
     {
@@ -59,10 +58,20 @@ class AdminController extends AbstractController
             foreach ($caracteristics[0] as $key => $caracteristic) {
                 $adminRoomManager->checkCaracteristics($postData, $data, $errors, $key);
             }
+            if (isset($_FILES)) {
+                $fileData = $_FILES;
+                foreach ($photos[0] as $key => $photo) {
+                    $adminRoomManager->checkPhotos($fileData, $data, $errors, $key);
+
+                }
+            }
+
+
         }
 
 
         return $this->twig->render('Admin/addroom.html.twig', ['data' => $adminRoomManager->data,
-            'errors' => $adminRoomManager->errors, 'post' => $_POST, 'caracteristics' => $caracteristics]);
+            'errors' => $adminRoomManager->errors, 'photos' => $photos, 'caracteristics' => $caracteristics,
+            'filedata'=>$fileData]);
     }
 }

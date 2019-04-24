@@ -162,4 +162,29 @@ caracteristic5, caracteristic6 FROM ' . $this->secondTableToJoin)->fetchAll();
             }
         }
     }
+
+
+    public function checkPhotos(array $fileData, array $data, array $errors, string $nameInArray)
+    {
+        if (isset($fileData[$nameInArray])) {
+            $img = $fileData[$nameInArray];
+            $autorizedExtensions = ['jpeg', '.jpg', '.png'];
+            $extension = strtolower(substr($img['name'], -4));
+            if (in_array($extension, $autorizedExtensions) && ($img['size'] < 500000)) {
+                move_uploaded_file($img['tmp_name'], "/assets/images/rooms/" . $img['name']);
+                $this->data[$nameInArray] = $data[$nameInArray];
+                $directory = '/assets/images/rooms';
+                $openDirectory = opendir($directory);
+                while ($file = readdir($openDirectory)) {
+                    echo $file;
+                    return $this->data;
+                }
+            } else {
+                $errors[$nameInArray] = 'Votre fichier doit être une image de type ' .
+                    implode(' ou ', $autorizedExtensions) . ' .';
+                $this->errors[$nameInArray] = $errors[$nameInArray];
+                return $this->errors;
+            }
+        }
+    }
 }
