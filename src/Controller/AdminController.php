@@ -19,7 +19,6 @@ class AdminController extends AbstractController
         return $this->twig->render('Admin/index.html.twig');
     }
 
-
     /**Gives the existing rooms in database
      * @return string
      * @throws \Twig\Error\LoaderError
@@ -29,11 +28,10 @@ class AdminController extends AbstractController
     public function rooms()
     {
         $adminRoomManager = new AdminRoomManager();
-        $rooms = $adminRoomManager->selectAll();
+        $adminRoomManager->rooms = $adminRoomManager->selectAll();
 
-        return $this->twig->render('Admin/rooms.html.twig', ['rooms' => $rooms]);
+        return $this->twig->render('Admin/rooms.html.twig', ['rooms' => $adminRoomManager->rooms]);
     }
-
 
     /**Checks the $_POST data
      * @return string
@@ -45,33 +43,41 @@ class AdminController extends AbstractController
     {
         $adminRoomManager = new AdminRoomManager();
         $data = [];
-        $errors = [];
         $photos = $adminRoomManager->selectQuiteAllFromFirstJoined();
         $caracteristics = $adminRoomManager->selectQuiteAllFromSecondJoined();
-
-
+        $adminRoomManager->rooms = $adminRoomManager->selectAll();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $postData = $_POST;
-            $adminRoomManager->checkName($postData, $data, $errors);
-            $adminRoomManager->checkDescription($postData, $data, $errors, 'description');
-            $adminRoomManager->checkNumber($postData, $data, $errors, 'price');
+            $adminRoomManager->checkName($postData, $data);
+            $adminRoomManager->checkDescription($postData, $data, 'description');
+            $adminRoomManager->checkNumber($postData, $data, 'price');
             foreach ($caracteristics[0] as $key => $caracteristic) {
-                $adminRoomManager->checkCaracteristics($postData, $data, $errors, $key);
+                $adminRoomManager->checkCaracteristics($postData, $data, $key);
             }
-            if (isset($_FILES)) {
-                $fileData = $_FILES;
-                foreach ($photos[0] as $key => $photo) {
-                    $adminRoomManager->checkPhotos($fileData, $data, $errors, $key);
-
-                }
+            $adminRoomManager->insert($adminRoomManager->data);
+            $adminRoomManager->insertCaracteristics($adminRoomManager->data);
+            if ($_FILES) {
+                $files = $_FILES;
+                $adminRoomManager->createAnArrayRankedByPhoto($files);
+                $adminRoomManager->createAnArrayWithThePhotoNames($adminRoomManager->file);
+                $adminRoomManager->checkSize();
+                $adminRoomManager->checkType();
+                $adminRoomManager->changeName($adminRoomManager->file);
+                $adminRoomManager->addPhotosInDatabase($adminRoomManager->data);
+                $adminRoomManager->transferFiles();
             }
-
-
+            header('location:../Admin/success');
         }
+        return $this->twig->render(
+            'Admin/addroom.html.twig',
+            ['photos' => $photos, 'caracteristics' => $caracteristics, 'rooms' => $adminRoomManager->rooms]
+        );
+    }
 
-
-        return $this->twig->render('Admin/addroom.html.twig', ['data' => $adminRoomManager->data,
-            'errors' => $adminRoomManager->errors, 'photos' => $photos, 'caracteristics' => $caracteristics,
-            'filedata'=>$fileData]);
+    public function success()
+    {
+        $adminRoomManager = new AdminRoomManager();
+        $adminRoomManager->rooms = $adminRoomManager->selectAll();
+        return $this->twig->render('Admin/success.html.twig', ['rooms' => $adminRoomManager->rooms]);
     }
 }

@@ -6,18 +6,6 @@
     {% block content %}
 
 
-        errors{{ dump (errors) }}<br><br>
-
-        Data {{ dump (data) }}<br><br>
-
-        POST {{ dump(post) }}
-
-        caracteristics {{ dump (caracteristics) }}<br><br>
-
-        FILE DATA {{ dump (filedata) }}<br><br>
-
-
-
         <h1>Ajouter une chambre</h1>
 
         <div class="row justify-content-center">
@@ -81,21 +69,25 @@
                 <!-- END CARAC-->
 
 
-                {% for key, photo in photos %}
-                <div class="row mb-2 mt-3">
+                {% for key, i in 0..3 %}
+                    <div class="row mb-3">
 
-                    <label for="photo{{ loop.index }}" class=" col-2 pt-1 pl-3">Photo {{ loop.index }}:</label>
+                        <label for='picture{{ loop.index0 }}' class="col-4 pt-1 pl-3">Votre photo:</label>
+                        <input id='picture{{ loop.index0 }}' name="photo[]" type="file" multiple="multiple"
+                               class="pl-0 mb-2 col-6"/>
+                        {% if errors[key].size %}
+                            <div class="alert alert-danger col-12">{{ errors[key].size }}</div>
+                        {% endif %}
+                        {% if errors[key].type %}
+                            <div class="alert alert-danger col-12">{{ errors[key].type }}</div>
+                        {% endif %}
+                    </div>
 
+                {% endfor %}
 
-                    <input type="file" name="photo{{ key }}" id="photo{{ loop.index }}" class="mb-2 col-6 mr-0">
-                    {% if errors[key] %}
-                        <div class="alert alert-danger">{{ errors[key] }}</div>
-                    {% endif %}
-                </div>
-                    {% endfor %}
-                    <div class="row justify-content-center mt-5">
-                        <input type="submit" name="Envoyer" class="col-3 mt-4 mb-4">
-
+                <div class="text-center">
+                    <button class="btn m-5 btn-primary" type="submit">Envoyer</button>
+                    <a class="btn m-5 btn-primary" href="../.." role="button">Annuler</a>
                 </div>
 
             </form>
