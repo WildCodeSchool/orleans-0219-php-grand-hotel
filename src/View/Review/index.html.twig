@@ -4,22 +4,19 @@
     <div class="container-fluid"><h1>Commentaires clients</h1>
         <div class="row"></div>
         <a class="btn btn-primary" href="addreview" role="button">Partagez votre expérience</a>
-    </div>
-
-    <div class="card-deck">
-        {% for review in reviews %}
-            <div class="card">
-                <p class="text-right p-2 pr-3">Note : {{ review.grade }}/{{ rules.maximumGrade }}</p>
-                <h5 class="card-title text-center">{{ review.name }}</h5>
-                <div class="card-body">
-
-
-                    <p class="card-text">{{ review.comment }}</p>
+        <div class="row justify-content-center">
+            {% for review in reviews %}
+                <div class="card col-3">
+                    <p class="text-right p-2 pr-3">Note : {{ review.grade }}/{{ rules.maximumGrade }}</p>
+                    <h5 class="card-title text-center">{{ review.name }}</h5>
+                    <div class="card-body">
+                        <p class="card-text">{{ review.comment }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">{{ review.date }}</small>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <small class="text-muted">{{ review.date }}</small>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
