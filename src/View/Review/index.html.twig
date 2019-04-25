@@ -9,7 +9,7 @@
     <div class="card-deck">
         {% for review in reviews %}
             <div class="card">
-                <p class="text-right p-2 pr-3">Note : {{ review.note }}/5</p>
+                <p class="text-right p-2 pr-3">Note : {{ review.grade }}/{{ rules.maximumGrade }}</p>
                 <h5 class="card-title text-center">{{ review.name }}</h5>
                 <div class="card-body">
 

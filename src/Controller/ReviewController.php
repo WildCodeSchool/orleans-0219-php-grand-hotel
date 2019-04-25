@@ -19,7 +19,11 @@ use App\Services\CleanForm;
  */
 class ReviewController extends AbstractController
 {
-
+    const FORMRULES = [
+        "nameMaxCharacters" => 25,
+        "reviewMaxCharacters" => 500,
+        "minimumGrade" => 1,
+        "maximumGrade" => 5];
 
     /**
      * Display item listing
@@ -34,16 +38,12 @@ class ReviewController extends AbstractController
         $reviewManager = new ReviewManager();
         $reviews = $reviewManager->selectAllOnLine();
 
-        return $this->twig->render('Review/index.html.twig', ['reviews' => $reviews]);
+        return $this->twig->render('Review/index.html.twig', ['reviews' => $reviews, 'rules' => self::FORMRULES]);
     }
 
 
     public function addreview()
     {
-        $formRules = ["nameMaxCharacters" => 25,
-            "reviewMaxCharacters" => 500,
-            "minimumGrade" => 1,
-            "maximumGrade" => 5];
         $errors = [];
         $postData = [];
 
@@ -59,33 +59,31 @@ class ReviewController extends AbstractController
                     $cleanForm->checkMaxLength(
                         $postData['name'],
                         $errors,
-                        $formRules['nameMaxCharacters'],
+                        self::FORMRULES['nameMaxCharacters'],
                         'name'
                     );
                 $errors = $cleanForm->checkMaxLength(
                     $postData['review'],
                     $errors,
-                    $formRules['reviewMaxCharacters'],
+                    self::FORMRULES['reviewMaxCharacters'],
                     'review'
                 );
                 $errors = $cleanForm->checkGrade(
                     $postData['grade'],
                     $errors,
-                    $formRules['minimumGrade'],
-                    $formRules['maximumGrade'],
+                    self::FORMRULES['minimumGrade'],
+                    self::FORMRULES['maximumGrade'],
                     'grade'
                 );
             }
-            $ReviewManager = new ReviewManager();
-
-
-            /* $id = $itemManager->insert($item);
-             header('Location:/item/show/' . $id);
- */
+            if ((empty($errors) && (!empty($postData)))) {
+                $ReviewManager = new ReviewManager();
+                $ReviewManager->insert($postData);
+            }
         }
         return $this->twig->render(
             'Review/addreview.html.twig',
-            ['postdata' => $postData, 'errors' => $errors, 'rules' => $formRules]
+            ['postdata' => $postData, 'errors' => $errors, 'rules' => self::FORMRULES]
         );
     }
 }
