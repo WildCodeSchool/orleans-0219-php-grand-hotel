@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container-fluid"><h1>Commentaires clients</h1>
         <div class="row"></div>
-        <a class="btn btn-primary" href="addreview" role="button">Partagez votre expérience</a>
+        <a class="btn btn-primary" href="../../../review/addreview" role="button">Partagez votre expérience</a>
         <div class="row justify-content-center">
             {% for review in reviews %}
                 <div class="card col-3">
@@ -19,4 +19,11 @@
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}
+{% block javascript %}<script>
+let params = new URLSearchParams(document.location.search.substring(1));
+let success = params.get("success");
+if (success == 'true') {
+    alert("Votre commentaire a bien été transmis. Il sera publié après vérification.")
+}</script>{% endblock %}

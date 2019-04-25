@@ -33,6 +33,8 @@ class ReviewController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
+
+
     public function index()
     {
         $reviewManager = new ReviewManager();
@@ -79,6 +81,7 @@ class ReviewController extends AbstractController
             if ((empty($errors) && (!empty($postData)))) {
                 $ReviewManager = new ReviewManager();
                 $ReviewManager->insert($postData);
+                header('location:index/?success=true&');
             }
         }
         return $this->twig->render(
