@@ -1,0 +1,48 @@
+{% extends 'layoutVisitor.html.twig' %}
+
+{% block content %}
+    <div class="container-fluid"><h1>Commentaires clients</h1>
+        <div class="row"></div>
+        <a class="btn btn-primary" href="#" role="button">Partagez votre expérience</a>
+    </div>
+
+    <h1>Ajouter un commentaire</h1>
+
+    <div class="row justify-content-center">
+        <form method="POST" enctype="multipart/form-data" action="addreview" class="col-5">
+
+            <div class="row">
+                <label for="name" class=" col-4 pt-1 pl-3">Votre pseudonyme</label>
+
+
+                <input type="text" class=" mb-2 col-6" id="name" name="name"
+                       placeholder="Moins de 50 caractères" value="{{ data.name }}">
+            </div>
+            {% if errors.name %}
+
+                <div class="alert alert-danger">{{ errors.name }}</div>
+
+            {% endif %}
+            <div class="row pt-2">
+                <label for="description" class="col-4 align-self-center">Votre commentaire</label>
+
+
+                <textarea class=" mb-2 m-0 col-6" id="description" name="description"
+                          placeholder="Entrez votre description ici" rows="3">{{ data.description }}</textarea>
+            </div>
+            {% if errors.description %}
+
+                <div class="alert alert-danger">{{ errors.description }}</div>
+
+            {% endif %}
+
+
+            <div class="text-center">
+                <button class="btn m-5 btn-primary" type="submit">Envoyer</button>
+                <a class="btn m-5 btn-primary" href="../.." role="button">Annuler</a>
+            </div>
+
+        </form>
+
+    </div>
+{% endblock %}
