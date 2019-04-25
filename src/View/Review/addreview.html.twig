@@ -2,47 +2,73 @@
 
 {% block content %}
     <div class="container-fluid"><h1>Commentaires clients</h1>
-        <div class="row"></div>
-        <a class="btn btn-primary" href="#" role="button">Partagez votre expérience</a>
-    </div>
+        <div class="row">
 
-    <h1>Ajouter un commentaire</h1>
+            POST {{ dump(postdata) }}<br><br>
 
-    <div class="row justify-content-center">
-        <form method="POST" enctype="multipart/form-data" action="addreview" class="col-5">
+        RULES {{ dump(rules) }}<br><br>
 
-            <div class="row">
-                <label for="name" class=" col-4 pt-1 pl-3">Votre pseudonyme</label>
+        ERRORS {{ dump(errors) }}
+        </div>
+        <h1>Ajouter un commentaire</h1>
 
+        <div class="row justify-content-center">
+            <form method="POST" enctype="multipart/form-data" action="addreview" class="col-5">
 
-                <input type="text" class=" mb-2 col-6" id="name" name="name"
-                       placeholder="Moins de 50 caractères" value="{{ data.name }}">
-            </div>
-            {% if errors.name %}
-
-                <div class="alert alert-danger">{{ errors.name }}</div>
-
-            {% endif %}
-            <div class="row pt-2">
-                <label for="description" class="col-4 align-self-center">Votre commentaire</label>
+                <div class="row">
+                    <label for="name" class=" col-4 pt-1 pl-3">Votre pseudonyme</label>
 
 
-                <textarea class=" mb-2 m-0 col-6" id="description" name="description"
-                          placeholder="Entrez votre description ici" rows="3">{{ data.description }}</textarea>
-            </div>
-            {% if errors.description %}
+                    <input type="text" class=" mb-2 col-7" id="name" name="name"
+                           placeholder="Moins de {{ rules.nameMaxCharacters }} caractères" value="{{ data.name }}">
+                </div>
+                {% for error in errors.name %}
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+                {% endfor %}
 
-                <div class="alert alert-danger">{{ errors.description }}</div>
+                <div class="row pt-2">
+                    <label for="review" class="col-4 align-self-center">Votre commentaire</label>
 
-            {% endif %}
+
+                    <textarea class=" mb-2 m-0 col-7" id="review" name="review"
+                              placeholder="Entrez votre commentaire ici, en moins de {{ rules.reviewMaxCharacters }} caractères."
+                              rows="3">{{ data.description }}</textarea>
+                </div>
+                {% for error in errors.review %}
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+                {% endfor %}
+                <div class="row no-gutters justify-content-left pt-2">
+                    <p class="col-4">Votre note /5</p>
 
 
-            <div class="text-center">
-                <button class="btn m-5 btn-primary" type="submit">Envoyer</button>
-                <a class="btn m-5 btn-primary" href="../.." role="button">Annuler</a>
-            </div>
+                    {% for key  in rules.minimumGrade..rules.maximumGrade %}
+                        <div class="">
+                            <label for="grade{{ key }}">{{ key }}</label>
+                            <input type="radio" id="grade{{ key }}" name="grade" value="{{ key }}"
+                                    {% if loop.last %}{% endif %}
+                                   class="mr-4">
+                        </div>
+                    {% endfor %}
+                    <div class="ml-3 col-1"></div>
+                </div>
 
-        </form>
+                {% for error in errors.grade %}
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error }}</div>
+                    {% endif %}
+                {% endfor %}
 
+
+                <div class="text-center ml-5">
+                    <button class="btn m-5 btn-primary" type="submit">Envoyer</button>
+                    <a class="btn m-5 btn-primary" href="index" role="button">Annuler</a>
+                </div>
+
+            </form>
+        </div>
     </div>
 {% endblock %}

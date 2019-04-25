@@ -15,6 +15,7 @@ class RoomController extends AbstractController
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
+
     public function index()
     {
 
