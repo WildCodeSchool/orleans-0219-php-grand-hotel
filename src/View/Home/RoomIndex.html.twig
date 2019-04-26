@@ -1,15 +1,17 @@
 <!-- RoomIndex -->
-
+{{ dump(rooms) }}
+<br><br>
+{{ dump(photos) }}
 <div class="container-fluid">
     <div class = option>
         <h2>Nos Chambres</h2>
     </div>
     <div class="galery">
         <div class="row justify-content-around">
-
+{% for key, room in rooms %}
             <div class="card-gallery col-lg-3 col-sm-8 col-md-5">
                 <button type="button" class = "btn">
-                    <img src="/assets/images/galerie/chambrestandard.jpeg" class="img-thumbnail" alt="chambre standard" data-toggle="modal" data-target="#exampleModal2">
+                    <img src="/assets/images/{{ photos[key][0].photo_name }}" class="img-thumbnail" alt="chambre standard" data-toggle="modal" data-target="#exampleModal2">
                 </button>
                 <div class="card-body-gallery">
                     <p class="card-title">Chambre standard</p>
@@ -28,7 +30,7 @@
                     </div>
                 </div>
             </div>
-
+{% endfor %}
             <div class="card-gallery col-lg-3 col-sm-8 col-md-5">
                 <button type="button" class = "btn">
                     <img src="/assets/images/galerie/chambreconfort.jpg" class="img-thumbnail" alt="chambre confort" data-toggle="modal" data-target="#exampleModal4">
