@@ -1,29 +1,13 @@
 <?php
 
-
 namespace App\Model;
 
 class RoomManager extends AbstractManager
 {
-
     /**
      * Gives the table name
      */
     const TABLE = 'room';
-
-
-    /**
-     * @var string
-     */
-    protected $className;
-    /**
-     * @var string
-     */
-    protected $tableToJoin;
-    /**
-     * @var string
-     */
-    protected $secondTableToJoin;
 
     /**
      * RoomManager constructor
@@ -31,42 +15,42 @@ class RoomManager extends AbstractManager
     public function __construct()
     {
         parent::__construct(self::TABLE);
-        $this->tableToJoin = 'room_photo';
-        $this->secondTableToJoin = 'room_caracteristic';
     }
 
     /**
-     * get the table rooms joined with the tables photos and caracteristic
-     * @param string $foreignKey
-     * @param string $primaryKey
-     * @param string $secondForeignKey
+     * Selects the data from the table room
      * @return array
      */
-    public function selectAllTheTables(string $foreignKey, string $primaryKey, string $secondForeignKey): array
+    public function selectTableRoom(): array
     {
-        return $this->pdo->query('SELECT * FROM ' . $this->table . ' JOIN ' . $this->tableToJoin . ' ON ' .
-            $this->tableToJoin . '.' . $foreignKey . '=' . $this->table . '.' . $primaryKey . ' JOIN ' .
-            $this->secondTableToJoin . ' ON ' .
-            $this->secondTableToJoin . '.' . $secondForeignKey . '=' . $this->table . '.' . $primaryKey)->fetchAll();
+        return $this->pdo->query('SELECT name, description, price FROM room;')->fetchAll();
     }
 
     /**
-     * retourne table photos without ids
+     * Selects the caracteristics data for one room
+     * @param string $roomName
      * @return array
      */
-    public function selectAllThePicturesWithoutIds(): array
+    public function selectCaracteristics(string $roomName): array
     {
-
-        return $this->pdo->query('SELECT photo1, photo2, photo3, photo4 FROM ' . $this->tableToJoin)->fetchAll();
+        return $this->pdo->query(
+            "SELECT  caracteristic.caracteristic_name FROM room
+    JOIN room_caracteristic ON room_caracteristic.room_id = room.id
+    JOIN caracteristic ON room_caracteristic.caracteristic_id = caracteristic.id WHERE
+    room.name = '$roomName';"
+        )->fetchAll();
     }
 
     /**
-     * get the table caracteristics without ids
+     * Selects the photos for one room
+     * @param string $roomName
      * @return array
      */
-    public function selectAllTheCaracteristicsWithoutIds(): array
+    public function selectPhotos(string $roomName): array
     {
-
-        return $this->pdo->query('SELECT * FROM ' . $this->secondTableToJoin)->fetchAll();
+        return $this->pdo->query(
+            "SELECT room_photo.photo_name FROM room_photo JOIN room ON
+    room_photo.room_id = room.id WHERE room.name ='$roomName';"
+        )->fetchAll();
     }
 }
