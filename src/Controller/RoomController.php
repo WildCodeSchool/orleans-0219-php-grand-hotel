@@ -19,7 +19,7 @@ class RoomController extends AbstractController
     {
 
         $roomManager = new RoomManager();
-        $rooms = $roomManager->selectAllTheTables('room_id', 'id', 'room_id');
+        $rooms = $roomManager->selectAll();
 
         $photos = $roomManager->selectAllThePicturesWithoutIds();
         $caracteristics = $roomManager->selectAllTheCaracteristicsWithoutIds();
