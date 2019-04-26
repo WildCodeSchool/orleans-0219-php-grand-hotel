@@ -19,9 +19,9 @@ use App\Services\CleanForm;
  */
 class ReviewController extends AbstractController
 {
-    const FORMRULES = [
+    const FORM_RULES = [
         "nameMaxCharacters" => 25,
-        "reviewMaxCharacters" => 500,
+        "reviewMaxCharacters" => 100,
         "minimumGrade" => 1,
         "maximumGrade" => 5];
 
@@ -33,17 +33,22 @@ class ReviewController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-
-
     public function index()
     {
         $reviewManager = new ReviewManager();
         $reviews = $reviewManager->selectAllOnLine();
 
-        return $this->twig->render('Review/index.html.twig', ['reviews' => $reviews, 'rules' => self::FORMRULES]);
+        return $this->twig->render('Review/index.html.twig', [
+            'reviews' => $reviews,
+            'rules' => self::FORM_RULES]);
     }
 
-
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function addreview()
     {
         $errors = [];
@@ -61,20 +66,20 @@ class ReviewController extends AbstractController
                     $cleanForm->checkMaxLength(
                         $postData['name'],
                         $errors,
-                        self::FORMRULES['nameMaxCharacters'],
+                        self::FORM_RULES['nameMaxCharacters'],
                         'name'
                     );
                 $errors = $cleanForm->checkMaxLength(
                     $postData['review'],
                     $errors,
-                    self::FORMRULES['reviewMaxCharacters'],
+                    self::FORM_RULES['reviewMaxCharacters'],
                     'review'
                 );
                 $errors = $cleanForm->checkGrade(
                     $postData['grade'],
                     $errors,
-                    self::FORMRULES['minimumGrade'],
-                    self::FORMRULES['maximumGrade'],
+                    self::FORM_RULES['minimumGrade'],
+                    self::FORM_RULES['maximumGrade'],
                     'grade'
                 );
             }
@@ -86,7 +91,7 @@ class ReviewController extends AbstractController
         }
         return $this->twig->render(
             'Review/addreview.html.twig',
-            ['postdata' => $postData, 'errors' => $errors, 'rules' => self::FORMRULES]
+            ['postdata' => $postData, 'errors' => $errors, 'rules' => self::FORM_RULES]
         );
     }
 }

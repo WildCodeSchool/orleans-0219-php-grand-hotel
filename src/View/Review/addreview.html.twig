@@ -3,12 +3,6 @@
 {% block content %}
     <div class="container-fluid"><h1>Commentaires clients</h1>
         <div class="row">
-
-            POST {{ dump(postdata) }}<br><br>
-
-        RULES {{ dump(rules) }}<br><br>
-
-        ERRORS {{ dump(errors) }}
         </div>
         <h1>Ajouter un commentaire</h1>
 
@@ -19,7 +13,7 @@
                     <label for="name" class=" col-4 pt-1 pl-3">Votre pseudonyme</label>
 
 
-                    <input type="text" class=" mb-2 col-7" id="name" name="name"
+                    <input type="text" class=" mb-2 col-7" id="name" name="name" required
                            placeholder="Moins de {{ rules.nameMaxCharacters }} caractères" value="{{ data.name }}">
                 </div>
                 {% for error in errors.name %}
@@ -32,7 +26,7 @@
                     <label for="review" class="col-4 align-self-center">Votre commentaire</label>
 
 
-                    <textarea class=" mb-2 m-0 col-7" id="review" name="review"
+                    <textarea class=" mb-2 m-0 col-7" id="review" name="review" required
                               placeholder="Entrez votre commentaire ici, en moins de {{ rules.reviewMaxCharacters }} caractères."
                               rows="3">{{ data.description }}</textarea>
                 </div>
@@ -48,7 +42,7 @@
                     {% for key  in rules.minimumGrade..rules.maximumGrade %}
                         <div class="">
                             <label for="grade{{ key }}">{{ key }}</label>
-                            <input type="radio" id="grade{{ key }}" name="grade" value="{{ key }}"
+                            <input type="radio" id="grade{{ key }}" name="grade" required value="{{ key }}"
                                     {% if loop.last %}{% endif %}
                                    class="mr-4">
                         </div>

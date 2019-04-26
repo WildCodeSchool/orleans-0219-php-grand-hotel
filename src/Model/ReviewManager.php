@@ -27,13 +27,20 @@ class ReviewManager extends AbstractManager
         parent::__construct(self::TABLE);
     }
 
-
+    /**
+     * Shows all the reviews accepted by the administrator.
+     * @return array
+     */
     public function selectAllOnLine()
     {
         return $this->pdo->query('SELECT name, comment, grade, date FROM review WHERE online =1;')->fetchAll();
     }
 
-
+    /**
+     * Insert all the data from post in the database; adds the date of the review, and an item online which is 0 ,
+     * means that the review should not be published until seen by  the administrator
+     * @param array $data
+     */
     public function insert(array $data):void
     {
         $date = date("j" . "/" . "m" . "/" . "Y");
