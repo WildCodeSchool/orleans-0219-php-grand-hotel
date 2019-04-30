@@ -28,6 +28,7 @@ class ContactController extends AbstractController
      */
     public function index()
     {
+
         $errors = [];
         $forms = ["firstname" => 50,
             "mail" => 50,
@@ -64,6 +65,7 @@ class ContactController extends AbstractController
                 $contactManager->insert($postData);
                 header('location:index/?success=true&');
             }
+
         }
         return $this->twig->render('Contact/index.html.twig', ['errors' => $errors, 'get' => $_GET,]);
     }
