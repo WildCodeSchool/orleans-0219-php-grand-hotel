@@ -1,0 +1,90 @@
+{% extends 'layoutVisitor.html.twig' %}
+
+{% block content %}
+    <body>
+    <div class="container-fluid">
+
+        <div class="jumbotron">
+            <!-- <h1 class="display-4">Contact et Accès</h1> -->
+        </div>
+        <h1>Contact et Accès</h1>
+        <div class="row">
+            <div class="col-form-contact col-lg-6">
+                <h2>Contactez-nous</h2>
+                {% if get.id == review.id %}
+                    <div class="col-11 text-success text-center">Votre modification a bien été prise en compte</div>
+                {% endif %}
+                <form method="post" action="">
+                    <div class="row row-form justify-content-center">
+                        <div class="form-group col-6">
+                            <label for="firstname">Prénom</label>
+                            <input type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp" name="firstname"
+                                   value="{{ postData["firstname"] }}">
+                            <small class="text-danger font-weight-bold">{{ errors.firstname.empty }}</small>
+                            <small class="text-danger font-weight-bold">{{ errors.firstname.length }}</small>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                        <div class="form-group col-6">
+                            <label for="email">Adresse mail</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="mail"
+                                   value="{{ postData["mail"] }}" required>
+                            <small class="text-danger font-weight-bold">{{ errors.mail.empty }}</small>
+                            <small class="text-danger font-weight-bold">{{ errors.mail.length }}</small>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                        <div class="form-group col-6">
+                            <label for="message">Votre message</label>
+                            <textarea class="form-control" id="message" rows="3" name="message">{{ postData["message"] }}</textarea>
+                            <small class="text-danger font-weight-bold">{{ errors.message.empty }}</small>
+                            <small class="text-danger font-weight-bold">{{ errors.message.length }}</small>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <h2>Accès</h2>
+                <div class="row justify-content-center mb-3">
+                    <iframe width="380" height="380" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=1.9008252024650576%2C47.90348899695832%2C1.9043657183647158%2C47.90498319909306&amp;
+                        layer=mapnik&amp;marker=47.90423520437858%2C1.9025954604148865"></iframe><br/>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <img src="/assets/images/voiture-logo.png">
+                        En voiture, vous pourrez vous garez au parking Cheval Rouge:
+                        <ul>
+                            <li>Autoroute A71, sortie La Chapelle Saint Mesmin - Orléans centre</li>
+                            <li>RN 20, direction Orléans centre</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <img src="/assets/images/train-logo.png">
+                        En train, par la gare d'Orléans qui vous déposera directement au centre ville:
+                        <ul>
+                            <li>En provenance de Paris-Austerlitz, arrêt Orléans - centre.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-10">
+                        <img src="/assets/images/tram-logo.png">
+                        En transport en commun:
+                        <ul>
+                            <li>Tram A, arrêt République</li>
+                            <li>Tram B, arrêt De Gaulle</li>
+                            <li>Bus, ligne 1, 2, 3, 4, 5, 6, 7, 18, arrêt Gare d'Orléans</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+{% endblock %}
