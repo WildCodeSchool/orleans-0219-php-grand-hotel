@@ -474,9 +474,14 @@ hr{
     font-size: 18px;
 }
 
-.title-form{
+.title-form {
     color: white;
     text-align: center;
+}
+
+div iframe{
+    border-color: transparent;
+}
 
 /*review*/
 
